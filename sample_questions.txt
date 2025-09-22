@@ -1,10 +1,103 @@
-How can I send an automated email to a csv client list every day at 6pm using Power Automate? 
-Create a PowerFX function to create a random number between 1 and 10
-How can I embed a Canvas app in a Model Driven App?
-Give me an example of a Business Process Flow
-What is the difference between a Scheduled Flow and a Desktop Flow?
-What are Power Platform governance best practices?
-What is delegation in Power Apps and why is it important?
-How do I create responsive designs in Power Apps?
-This function isn't working, can you fix it? RandBetween( 0. 99 )
-Can you give me an Azure function implementation that would return the temperature in the UK?
+Power Apps:
+How do I create a gallery with search functionality in Power Apps?
+What's the difference between Canvas Apps and Model-Driven Apps?
+How do I handle error handling in Power Apps using IfError()?
+How can I create a multi-screen navigation in Power Apps?
+What are collections in Power Apps and how do I use them?
+How do I implement role-based security in Power Apps?
+How can I create a barcode scanner in Power Apps?
+How do I connect Power Apps to SharePoint lists?
+What's the difference between Patch() and Submit() functions?
+
+Power Automate:
+How do I create a approval workflow in Power Automate?
+What's the difference between instant, scheduled, and automated flows?
+How can I parse JSON responses in Power Automate?
+How do I handle errors and retries in Power Automate?
+How can I create a flow that works with Teams notifications?
+What are expressions in Power Automate and how do I use them?
+How do I create a flow that processes attachments from emails?
+How can I integrate Power Automate with Azure Logic Apps?
+
+Power BI :
+How do I create a DAX measure for year-over-year growth?
+What's the difference between calculated columns and measures?
+How can I create a drill-through report in Power BI?
+How do I implement row-level security in Power BI?
+What are the best practices for Power BI data modeling?
+How can I create custom visuals in Power BI?
+How do I schedule automatic data refresh in Power BI Service?
+
+Other:
+How can I use Microsoft Graph API with Power Platform?
+What are custom connectors and how do I create them?
+How do I implement CI/CD for Power Platform solutions?
+How can I use Azure Key Vault with Power Platform?
+What are the licensing considerations for Power Platform?
+How do I create environment variables in Power Platform?
+How can I use AI Builder for document processing?
+What's the difference between Dataverse and SharePoint for data storage?
+
+Azure Fundamentals:
+What are the different Azure subscription types and their differences?
+How do I create a resource group in Azure?
+What is the difference between Azure regions and availability zones?
+How do I set up billing alerts in Azure?
+What are Azure management groups and when should I use them?
+How do I implement Azure Policy for governance?
+
+Azure Compute:
+What's the difference between Azure VMs, App Service, and Container Instances?
+How do I create an Azure Virtual Machine using ARM templates?
+How can I auto-scale Azure App Service based on CPU usage?
+What are Azure VM Scale Sets and how do I configure them?
+How do I set up Azure Kubernetes Service (AKS) cluster?
+How can I migrate on-premises VMs to Azure?
+
+Azure Storage:
+What are the different Azure Storage account types and tiers?
+How do I set up Azure Blob Storage lifecycle management?
+What's the difference between Azure Files and Azure File Sync?
+How can I implement Azure Storage encryption at rest?
+How do I configure Azure CDN with Blob Storage?
+What are Azure Managed Disks and their performance tiers?
+
+Azure Networking:
+How do I create a Virtual Network with subnets in Azure?
+What's the difference between NSG and Azure Firewall?
+How do I set up VPN Gateway for site-to-site connectivity?
+How can I implement Azure Load Balancer vs Application Gateway?
+What is Azure Private Link and how do I configure it?
+How do I set up ExpressRoute connectivity?
+
+Azure Data & AI:
+How can I link Azure Data Factory and my local SSMS Server?
+What's the difference between Azure SQL Database and SQL Managed Instance?
+How do I set up Azure Synapse Analytics workspace?
+How can I create an Azure Cognitive Services account?
+What are the steps to deploy Azure Machine Learning models?
+How do I implement Change Data Capture in Azure SQL?
+
+Azure Security & Identity:
+How do I set up Azure AD B2B external collaboration?
+What's the difference between Azure AD roles and Azure RBAC?
+How can I implement Conditional Access policies?
+How do I configure Azure Key Vault for certificate management?
+What are Azure AD Privileged Identity Management best practices?
+How can I set up Azure Sentinel for security monitoring?
+
+Azure DevOps & Monitoring:
+How do I create a CI/CD pipeline in Azure DevOps?
+What's the difference between Azure Monitor and Application Insights?
+How can I set up automated deployments using Azure Resource Manager?
+How do I implement blue-green deployments in Azure?
+What are Azure Logic Apps and how do they differ from Azure Functions?
+How can I monitor Azure costs and set up budget alerts?
+
+Integration & Hybrid:
+How can I connect Azure services to on-premises Active Directory?
+What's Azure Arc and how do I manage hybrid resources?
+How do I set up Azure Site Recovery for disaster recovery?
+How can I implement Azure Backup for on-premises servers?
+What are the options for hybrid cloud storage with Azure?
+How do I configure Azure AD Connect for identity synchronization?

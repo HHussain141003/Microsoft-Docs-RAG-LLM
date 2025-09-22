@@ -41,7 +41,6 @@ quantization_config = BitsAndBytesConfig(
     bnb_4bit_use_double_quant=True,
     bnb_4bit_quant_type="nf4",
     bnb_4bit_compute_dtype=torch.float16,
-    bnb_4bit_quant_storage=torch.uint8
 )
 
 # Load model
@@ -189,23 +188,30 @@ def generate_answer(query):
     
     context = "\n\n---\n\n".join(context_parts)
     
-    # Create prompt
-    prompt = f"""[INST] You are a Microsoft documentation expert assistant. Use ONLY the provided Microsoft Learn documentation to answer the question.
+    prompt = f"""[INST] You are a Microsoft technology expert specializing in Power Platform, Azure, and Microsoft 365.
 
-Instructions:
-- Provide a clear, step-by-step answer when possible
-- Include specific examples, code snippets, or configuration details from the documentation
-- Reference which Microsoft service/product you're discussing
-- If multiple approaches exist, mention the alternatives
-- If the answer isn't in the documentation, state: "This information is not available in the provided documentation."
-- Be concise but comprehensive
+    INSTRUCTIONS:
+    • Use provided Microsoft Learn documentation as primary source
+    • Supplement with Microsoft expertise when documentation is limited
+    • Provide clear, well-formatted responses with proper spacing
+    • Include step-by-step instructions with numbered lists
+    • Add code examples and configuration details
+    • Mention alternative approaches when relevant
 
-Microsoft Learn Documentation:
-{context}
+    FORMATTING REQUIREMENTS:
+    • Use proper spacing between all words and sentences
+    • Separate sections with line breaks
+    • Format code blocks with triple backticks
+    • Use bullet points (•) or numbered lists (1.)
+    • Bold important terms with **text**
 
-Question: {query}
+    PROVIDED DOCUMENTATION:
+    {context}
 
-Provide a detailed answer based only on the documentation above: [/INST]"""
+    USER QUESTION:
+    {query}
+
+    Please provide a comprehensive, well-formatted answer with proper spacing and structure: [/INST]"""
 
     try:
         # Generate response
@@ -221,7 +227,7 @@ Provide a detailed answer based only on the documentation above: [/INST]"""
                 input_ids=input_ids,
                 attention_mask=attention_mask,
                 max_new_tokens=800,
-                temperature=0.3,
+                temperature=0.5,
                 do_sample=True,
                 top_p=0.9,
                 top_k=50,
