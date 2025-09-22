@@ -219,7 +219,7 @@ class DocumentCleaner:
                     # Remove low-quality documents
                     self.conn.execute("DELETE FROM documents WHERE id = ?", (doc['id'],))
                     stats['removed'] += 1
-                    print(f"🗑️  Removed low-quality document: {doc['title']}")
+                    print(f"Removed low-quality document: {doc['title']}")
                     continue
                 
                 # Update if content was improved
@@ -235,7 +235,7 @@ class DocumentCleaner:
                     
                     stats['improved'] += 1
                     improvement = len(original_content) - len(main_content)
-                    print(f"✨ Cleaned: {doc['title'][:50]}... (reduced by {improvement} chars)")
+                    print(f"Cleaned: {doc['title'][:50]}... (reduced by {improvement} chars)")
                 else:
                     stats['cleaned'] += 1
             
@@ -245,7 +245,7 @@ class DocumentCleaner:
             
             # Progress update
             progress = (offset / total_count) * 100
-            print(f"📊 Progress: {progress:.1f}% ({offset}/{total_count})")
+            print(f"Progress: {progress:.1f}% ({offset}/{total_count})")
         
         return stats
 
@@ -276,7 +276,7 @@ class DocumentCleaner:
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(documents, f, indent=2, ensure_ascii=False)
         
-        print(f"💾 Exported {len(documents)} cleaned documents to {output_file}")
+        print(f"Exported {len(documents)} cleaned documents to {output_file}")
         return len(documents)
 
     def get_cleaning_stats(self) -> Dict[str, Any]:
@@ -302,19 +302,19 @@ def main():
     
     try:
         # Clean the documents
-        print("🧹 Starting document cleaning process...")
+        print("Starting document cleaning process...")
         cleaning_stats = cleaner.clean_documents()
         
-        print("\n📊 Cleaning Results:")
+        print("\nCleaning Results:")
         for key, value in cleaning_stats.items():
             print(f"  {key.title()}: {value}")
         
         # Export cleaned data
-        print("\n💾 Exporting cleaned documents...")
+        print("\nExporting cleaned documents...")
         exported_count = cleaner.export_cleaned_data()
         
         # Show final stats
-        print("\n📈 Final Statistics:")
+        print("\nFinal Statistics:")
         final_stats = cleaner.get_cleaning_stats()
         for key, value in final_stats.items():
             if isinstance(value, float):
@@ -323,7 +323,7 @@ def main():
                 print(f"  {key}: {value}")
                 
     except Exception as e:
-        print(f"❌ Error during cleaning: {e}")
+        print(f"Error during cleaning: {e}")
     finally:
         cleaner.disconnect()
 
