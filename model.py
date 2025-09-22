@@ -140,11 +140,13 @@ def search_general(query, top_k):
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     
-    for (similarity, idx) in enumerate(zip(similarities[0], indices[0])):
+    for similarity, idx in zip(similarities[0], indices[0]):
         if idx == -1:
             continue
+
+        idx_int = int(idx)
             
-        cursor = conn.execute("SELECT * FROM documents WHERE rowid = ?", (idx + 1,))
+        cursor = conn.execute("SELECT * FROM documents WHERE rowid = ?", (idx_int + 1,))
         doc = cursor.fetchone()
         
         if doc:
@@ -169,6 +171,19 @@ def generate_answer(query):
         return "No relevant documents found in the Microsoft Learn knowledge base."
     
     print(f"Retrieved {len(retrieved_docs)} document chunks")
+
+    # Print document sources
+    print("\n--- Sources Used ---")
+    for i, doc in enumerate(retrieved_docs, 1):
+        title = doc.get('title', 'Untitled Document')
+        url = doc.get('url', 'No URL available')
+        category = doc.get('category', '')
+        similarity = doc.get('similarity_score', 0)
+        
+        print(f"{i}. [{category}] {title}")
+        print(f"   URL: {url}")
+        print(f"   Relevance: {similarity:.3f}")
+    print("--- End Sources ---\n")
     
     # Build context from database documents
     context_parts = []
