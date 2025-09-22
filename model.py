@@ -214,11 +214,10 @@ def generate_answer(query):
     • Mention alternative approaches when relevant
 
     FORMATTING REQUIREMENTS:
+    • Generate the response in a Markdown Format
     • Use proper spacing between all words and sentences
     • Separate sections with line breaks
     • Format code blocks with triple backticks
-    • Use bullet points (•) or numbered lists (1.)
-    • Bold important terms with **text**
 
     PROVIDED DOCUMENTATION:
     {context}
@@ -250,12 +249,11 @@ def generate_answer(query):
                 pad_token_id=tokenizer.pad_token_id,
                 eos_token_id=tokenizer.eos_token_id,
                 no_repeat_ngram_size=3,
-                early_stopping=True
             )
         
         # Extract generated text
         generated_tokens = outputs[0][input_length:]
-        answer = tokenizer.decode(generated_tokens, skip_special_tokens=True).strip()
+        answer = tokenizer.decode(generated_tokens, skip_special_tokens=True, clean_up_tokenization_spaces=True)
         
         return answer if answer else "I couldn't generate a proper response."
         

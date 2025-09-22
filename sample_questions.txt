@@ -19,7 +19,7 @@ What are expressions in Power Automate and how do I use them?
 How do I create a flow that processes attachments from emails?
 How can I integrate Power Automate with Azure Logic Apps?
 
-Power BI :
+Power BI:
 How do I create a DAX measure for year-over-year growth?
 What's the difference between calculated columns and measures?
 How can I create a drill-through report in Power BI?
