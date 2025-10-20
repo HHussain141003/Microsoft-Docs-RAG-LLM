@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAISS Embedding Visualization</title>
+    <style>
+      #container {
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script type="module">
+      import { Feder } from "./node_modules/@zilliz/feder/dist/index.js";
+
+      const feder = new Feder({
+        filePath: "visualisation_index.faiss",
+        source: "faiss",
+        domSelector: "#container",
+        viewParams: {},
+      });
+
+      feder.overview();
+    </script>
+  </body>
+</html>
