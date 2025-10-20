@@ -59,22 +59,23 @@ model = AutoModelForCausalLM.from_pretrained(
 
 print("Model loaded successfully!")
 
+USE_CATEGORY_MAPPING = False
 
 def retrieve_documents(query, top_k=5):
     """Retrieve relevant documents using FAISS similarity search."""
-
-    target_categories = get_categories_for_query(query)
-
-    if target_categories:
-        print(f"Targeting categories: {target_categories[:3]}...")
-        docs = search_by_category(query, target_categories, top_k)
+    
+    if USE_CATEGORY_MAPPING:
+        target_categories = get_categories_for_query(query)
         
-        
-        if docs and len(docs) > 0 and docs[0].get('similarity_score', 0) > 0.4:
-            return docs
-        else:
-            print("Category search yielded poor results, falling back...")
-
+        if target_categories:
+            print(f"Targeting categories: {target_categories[:3]}...")
+            docs = search_by_category(query, target_categories, top_k)
+            
+            if docs and len(docs) > 0 and docs[0].get('similarity_score', 0) > 0.4:
+                return docs
+            else:
+                print("Category search yielded poor results, falling back...")
+    
     print("Using general search")
     return search_general(query, top_k)
 
@@ -130,33 +131,47 @@ def search_by_category(query, categories, top_k):
 
 def search_general(query, top_k):
     """Original general search method."""
-
     query_embedding = embedder.encode([query])
+
+    print(f"Raw embedding shape: {query_embedding.shape}")
+    print(f"Raw embedding norm: {np.linalg.norm(query_embedding)}")
+
     query_embedding = query_embedding / np.linalg.norm(query_embedding)
-    
+
+    print(f"Normalized embedding norm: {np.linalg.norm(query_embedding)}")
+    print(f"First 5 values: {query_embedding[0][:5]}")  # Show first 5 value
+
+    # Use the index correctly (it's IndexFlatIP for cosine similarity)
     similarities, indices = index.search(query_embedding.astype('float32'), top_k)
+
+    print(f"Top similarities: {similarities[0]}")
+    print(f"Top indices: {indices[0]}")
+    
+    # Convert to actual similarity scores (IndexFlatIP returns cosine similarity directly)
+    print(f"Top similarities: {similarities[0]}")
+    print(f"Top indices: {indices[0]}")
 
     retrieved_docs = []
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
-    
+
     for similarity, idx in zip(similarities[0], indices[0]):
         if idx == -1:
             continue
 
         idx_int = int(idx)
-            
         cursor = conn.execute("SELECT * FROM documents WHERE rowid = ?", (idx_int + 1,))
         doc = cursor.fetchone()
-        
+
         if doc:
+            print(f"Retrieved doc {idx}: {doc['title'][:100]}...")
             retrieved_docs.append({
-                'similarity_score': float(similarity),
+                'similarity_score': float(similarity),  # This should now be correct
                 'title': doc['title'],
                 'category': doc['category'], 
                 'content': doc['content']
             })
-    
+
     conn.close()
     return retrieved_docs
 
@@ -240,11 +255,11 @@ def generate_answer(query):
             outputs = model.generate(
                 input_ids=input_ids,
                 attention_mask=attention_mask,
-                max_new_tokens=800,
-                temperature=0.5,
+                max_new_tokens=1200,
+                temperature=0.3,
                 do_sample=True,
-                top_p=0.9,
-                top_k=50,
+                top_p=0.85,
+                top_k=40,
                 repetition_penalty=1.15,
                 pad_token_id=tokenizer.pad_token_id,
                 eos_token_id=tokenizer.eos_token_id,
