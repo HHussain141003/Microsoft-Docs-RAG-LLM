@@ -224,23 +224,14 @@ def generate_answer(query):
     • Use provided Microsoft Learn documentation as primary source
     • Supplement with Microsoft expertise when documentation is limited
     • Provide clear, well-formatted responses with proper spacing
-    • Include step-by-step instructions with numbered lists
-    • Add code examples and configuration details
-    • Mention alternative approaches when relevant
 
-    FORMATTING REQUIREMENTS:
-    • Generate the response in a Markdown Format
-    • Use proper spacing between all words and sentences
-    • Separate sections with line breaks
-    • Format code blocks with triple backticks
-
-    PROVIDED DOCUMENTATION:
+    CONTEXT:
     {context}
 
-    USER QUESTION:
+    QUESTION:
     {query}
 
-    Please provide a comprehensive, well-formatted answer with proper spacing and structure: [/INST]"""
+    Provide a comprehensive answer in Markdown format: [/INST]"""
 
     try:
         # Generate response
